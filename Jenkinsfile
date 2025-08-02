@@ -2,13 +2,19 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "fizza424/docker-working"
+        IMAGE_NAME = "fizza424/Jenkins-Docker"
     }
 
     stages {
         stage('Build Docker Image') {
             steps {
                 bat "docker build -t %IMAGE_NAME% ."
+            }
+        }
+
+        stage('Checkout'){
+            steps{
+                git branch' main' , url: 'https://Fizza424/Jenkins-Docker'
             }
         }
 
