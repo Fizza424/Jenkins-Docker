@@ -1,0 +1,153 @@
+Started by user Fizza Naseer
+Obtained Jenkinsfile from git https://github.com/Fizza424/Jenkins-Docker.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in C:\ProgramData\Jenkins\.jenkins\workspace\Docker-project
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/Fizza424/Jenkins-Docker.git
+ > C:\Program Files\Git\cmd\git.exe init C:\ProgramData\Jenkins\.jenkins\workspace\Docker-project # timeout=10
+Fetching upstream changes from https://github.com/Fizza424/Jenkins-Docker.git
+ > C:\Program Files\Git\cmd\git.exe --version # timeout=10
+ > git --version # 'git version 2.49.0.windows.1'
+ > C:\Program Files\Git\cmd\git.exe fetch --tags --force --progress -- https://github.com/Fizza424/Jenkins-Docker.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > C:\Program Files\Git\cmd\git.exe config remote.origin.url https://github.com/Fizza424/Jenkins-Docker.git # timeout=10
+ > C:\Program Files\Git\cmd\git.exe config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > C:\Program Files\Git\cmd\git.exe rev-parse "refs/remotes/origin/main^{commit}" # timeout=10
+Checking out Revision a56584563a943c56322b2656fca14d7d234231fb (refs/remotes/origin/main)
+ > C:\Program Files\Git\cmd\git.exe config core.sparsecheckout # timeout=10
+ > C:\Program Files\Git\cmd\git.exe checkout -f a56584563a943c56322b2656fca14d7d234231fb # timeout=10
+Commit message: "Update Jenkinsfile"
+First time build. Skipping changelog.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout)
+[Pipeline] git
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > C:\Program Files\Git\cmd\git.exe rev-parse --resolve-git-dir C:\ProgramData\Jenkins\.jenkins\workspace\Docker-project\.git # timeout=10
+Fetching changes from the remote Git repository
+ > C:\Program Files\Git\cmd\git.exe config remote.origin.url https://github.com/Fizza424/Jenkins-Docker.git # timeout=10
+Fetching upstream changes from https://github.com/Fizza424/Jenkins-Docker.git
+ > C:\Program Files\Git\cmd\git.exe --version # timeout=10
+ > git --version # 'git version 2.49.0.windows.1'
+ > C:\Program Files\Git\cmd\git.exe fetch --tags --force --progress -- https://github.com/Fizza424/Jenkins-Docker.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > C:\Program Files\Git\cmd\git.exe rev-parse "refs/remotes/origin/main^{commit}" # timeout=10
+Checking out Revision a56584563a943c56322b2656fca14d7d234231fb (refs/remotes/origin/main)
+ > C:\Program Files\Git\cmd\git.exe config core.sparsecheckout # timeout=10
+ > C:\Program Files\Git\cmd\git.exe checkout -f a56584563a943c56322b2656fca14d7d234231fb # timeout=10
+ > C:\Program Files\Git\cmd\git.exe branch -a -v --no-abbrev # timeout=10
+ > C:\Program Files\Git\cmd\git.exe checkout -b main a56584563a943c56322b2656fca14d7d234231fb # timeout=10
+Commit message: "Update Jenkinsfile"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Docker Image)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Docker-project>docker build -t "fizza/week2project" . 
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 182B 0.0s done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/library/python:3.12-slim
+#2 DONE 3.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context:
+#3 transferring context: 2B done
+#3 DONE 0.1s
+
+#4 [1/5] FROM docker.io/library/python:3.12-slim@sha256:9c1d9ed7593f2552a4ea47362ec0d2ddf5923458a53d0c8e30edf8b398c94a31
+#4 resolve docker.io/library/python:3.12-slim@sha256:9c1d9ed7593f2552a4ea47362ec0d2ddf5923458a53d0c8e30edf8b398c94a31
+#4 resolve docker.io/library/python:3.12-slim@sha256:9c1d9ed7593f2552a4ea47362ec0d2ddf5923458a53d0c8e30edf8b398c94a31 0.2s done
+#4 DONE 0.2s
+
+#5 [internal] load build context
+#5 transferring context: 44.66kB 0.7s done
+#5 DONE 0.8s
+
+#6 [2/5] WORKDIR /app
+#6 CACHED
+
+#7 [3/5] COPY requirements.txt .
+#7 CACHED
+
+#8 [4/5] RUN pip install -r requirements.txt
+#8 CACHED
+
+#9 [5/5] COPY . .
+#9 DONE 0.2s
+
+#10 exporting to image
+#10 exporting layers
+#10 exporting layers 0.3s done
+#10 exporting manifest sha256:13f4ad88dcb52760cf6affc150c9a586623da5d981c46fb4643591fbdda4a3a9 0.0s done
+#10 exporting config sha256:2170e6f0432508311e92c55fd1bff23f03d7f102c5de1c3222417ff02b90a3f1 0.0s done
+#10 exporting attestation manifest sha256:a392c6f574f90750e59d4efd24bb38415810b56cfb6e75b5445b324b0dcdbe8c
+#10 exporting attestation manifest sha256:a392c6f574f90750e59d4efd24bb38415810b56cfb6e75b5445b324b0dcdbe8c 0.1s done
+#10 exporting manifest list sha256:c3cfd127b486a0c34cdc036915212d92085a1e3b63d488889037f37dcde698fa
+#10 exporting manifest list sha256:c3cfd127b486a0c34cdc036915212d92085a1e3b63d488889037f37dcde698fa 0.1s done
+#10 naming to docker.io/fizza/week2project:latest 0.0s done
+#10 unpacking to docker.io/fizza/week2project:latest
+#10 unpacking to docker.io/fizza/week2project:latest 0.4s done
+#10 DONE 1.2s
+[Pipeline] }
+[Pipeline] // withEnv
+Did you forget the `def` keyword? WorkflowScript seems to be setting a field named dockerImage (to a value of type Image) which could lead to memory leaks or other issues.
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Run Container)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] bat
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Cleanup)
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Docker-project>docker image prune -f 
+Total reclaimed space: 0B
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+✅ Build and deployment successful!
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
