@@ -5,6 +5,12 @@ pipeline {
         IMAGE_NAME = "fizza424/Jenkins-Docker"
     }
 
+    stage('Checkout'){
+            steps{
+                git branch' main' , url: 'https://Fizza424/Jenkins-Docker'
+            }
+        }
+    
     stages {
         stage('Build Docker Image') {
             steps {
@@ -12,12 +18,7 @@ pipeline {
             }
         }
 
-        stage('Checkout'){
-            steps{
-                git branch' main' , url: 'https://Fizza424/Jenkins-Docker'
-            }
-        }
-
+    
         stage('Run Docker Container') {
             steps {
                 bat '''
