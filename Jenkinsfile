@@ -2,51 +2,45 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "fizza424/Jenkins-Docker"
+        IMAGE_NAME = 'fizza/week2project'
     }
 
-    stage('Checkout'){
-            steps{
-                git branch' main' , url: 'https://Fizza424/Jenkins-Docker'
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Fizza424/Jenkins-Docker.git'
             }
         }
-    
-    stages {
+
         stage('Build Docker Image') {
             steps {
-                bat "docker build -t %IMAGE_NAME% ."
-            }
-        }
-
-    
-        stage('Run Docker Container') {
-            steps {
-                bat '''
-                    docker stop app || exit 0
-                    docker rm app || exit 0
-                    docker run -d -p 5000:5000 --name app %IMAGE_NAME%
-                '''
-            }
-        }
-
-        stage('Push to Docker Hub') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                    bat '''
-                        docker login -u %DOCKER_USER% -p %DOCKER_PASS%
-                        docker push %IMAGE_NAME%
-                    '''
+                script {
+                    dockerImage = docker.build(IMAGE_NAME)
                 }
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                script {
+                    dockerImage.run('-d -p 8080:80')
+                }
+            }
+        }
+
+        stage('Cleanup') {
+            steps {
+                bat 'docker image prune -f'
             }
         }
     }
 
     post {
         success {
-            echo "✅ Successfully deployed!"
+            echo '✅ Build and deployment successful!'
         }
         failure {
-            echo "❌ Deployment failed!"
+            echo '❌ Something went wrong.'
         }
     }
 }
